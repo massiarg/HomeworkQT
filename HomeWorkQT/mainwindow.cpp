@@ -33,6 +33,14 @@ void MainWindow::on_Btn2_clicked()
 
 }
 
+void MainWindow::setstrd(QString in){
+    MainWindow::strd = in;
+}
+
+QString MainWindow::getstrd(){
+    return MainWindow::strd;
+}
+
 void MainWindow::saveToFile(QList<QPair<QString, QString> > in){
     QString fileName = "D:\\GitQT\\HomeworkQT\\HomeworkQT\\Datafromwebsite.txt";
     QFile file(fileName);
