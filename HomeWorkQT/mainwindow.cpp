@@ -33,6 +33,26 @@ void MainWindow::on_Btn2_clicked()
 
 }
 
+void MainWindow::on_Btn3_clicked()
+{
+
+}
+
+void MainWindow::on_Btn4_clicked()
+{
+
+}
+
+void MainWindow::on_Btn5_clicked()
+{
+
+}
+
+void MainWindow::on_Btn6_clicked()
+{
+
+}
+
 void MainWindow::setstrd(QString in){
     MainWindow::strd = in;
 }
