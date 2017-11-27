@@ -60,7 +60,7 @@ void MainWindow::loadWebPage(){
     QNetworkRequest request;
 
     QString apiKey = "demo";
-    QString urlString = QString("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=%0").arg(apikey);
+    QString urlString = QString("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=%0").arg(apiKey);
 
     QUrl url(urlString);
 
