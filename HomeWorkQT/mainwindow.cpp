@@ -25,7 +25,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Btn1_clicked()
 {
-
+    loadWebPage();
 }
 
 void MainWindow::on_Btn2_clicked()
