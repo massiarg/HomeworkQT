@@ -61,7 +61,7 @@ void MainWindow::on_Btn5_clicked()
 
 void MainWindow::on_Btn6_clicked()
 {
-    plotVolume->makeplot(plotVolume->getValues());
+    plotVolume->makeplotVolume(plotVolume->getValues());
     plotVolume->show();
 }
 
