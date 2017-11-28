@@ -56,6 +56,7 @@ void MainWindow::on_Btn4_clicked()
 void MainWindow::on_Btn5_clicked()
 {
     plotClose->makeplot(plotClose->getValues());
+    plotClose->show();
 }
 
 void MainWindow::on_Btn6_clicked()
@@ -80,7 +81,7 @@ void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
     if(file.open(QIODevice::ReadWrite)){
         for(int i = 0; i<in.size(); i++){
             switch(i){
-            case O:
+            case 0:
                 stream<<"Open Values"<<"\r\n";
                 break;
             case 1:
@@ -96,9 +97,9 @@ void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
                 stream<<"Volume Values"<<"\r\n";
                 break;
             }
-            QList<QPair<QString, QString>> tempo;
-            for(int j = 0; i<tempo.size(); j++){
-                QPair<QString, QString> data = tempo[i];
+            QList<QPair<QString, QString>> tempo = in[i];
+            for(int j = 0; j<tempo.size(); j++){
+                QPair<QString, QString> data = tempo[j];
                 stream<< data.first << " - " << data.second<<"\r\n";
             }
         }
