@@ -17,8 +17,11 @@ public:
     void setValues(QList<QPair<QString, QString>> in);
     QList<QPair<QString, QString>> getValues();
 
+
+
 public slots:
     void makeplot(QList<QPair<QString, QString>> in);
+
 
 
 private:
