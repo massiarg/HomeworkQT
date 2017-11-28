@@ -17,11 +17,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void setstrd(QString in);
-    void saveToFile(QList<QPair<QString, QString>> in);
+    void saveToFile(QList<QList<QPair<QString, QString>>> in);
 
 private slots:
     void on_Btn1_clicked();
     void on_Btn2_clicked();
+
+    void on_Btn3_clicked();
+
+    void on_Btn4_clicked();
+
+    void on_Btn5_clicked();
+
+    void on_Btn6_clicked();
 
 public slots:
     void loadWebPage();
@@ -31,6 +39,8 @@ public slots:
 private:
     Ui::MainWindow *ui;
     QString strd;
+    QList<QPair<QString, QString>> graphValues;
+    QList<QList<QPair<QString, Qstring>>> alldata;
 };
 
 #endif // MAINWINDOW_H
