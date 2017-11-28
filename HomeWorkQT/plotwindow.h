@@ -20,6 +20,7 @@ public:
 
 
 public slots:
+    void makeplotVolume(QList<QPair<QString, QString>> in);
     void makeplot(QList<QPair<QString, QString>> in);
 
 
