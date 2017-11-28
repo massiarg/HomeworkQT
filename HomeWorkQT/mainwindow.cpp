@@ -61,17 +61,37 @@ QString MainWindow::getstrd(){
     return MainWindow::strd;
 }
 
-void MainWindow::saveToFile(QList<QPair<QString, QString> > in){
+void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
     QString fileName = "D:\\GitQT\\HomeworkQT\\HomeworkQT\\Datafromwebsite.txt";
     QFile file(fileName);
+    QTextStream stream(&file);
 
     if(file.open(QIODevice::ReadWrite)){
         for(int i = 0; i<in.size(); i++){
-            QPair<QString, QString> data = in[i];
-
-            QTextStream stream(&file);
-            stream<< data.first << " - " << data.second<<"\r\n";
+            switch(i){
+            case O:
+                stream<<"Open Values"<<"\r\n";
+                break;
+            case 1:
+                stream<<"High Values"<<"\r\n";
+                break;
+            case 2:
+                stream<<"Low Values"<<"\r\n";
+                break;
+            case 3:
+                stream<<"Close Values"<<"\r\n";
+                break;
+            case 4:
+                stream<<"Volume Values"<<"\r\n";
+                break;
+            }
+            QList<QPair<QString, QString>> tempo;
+            for(int j = 0; i<tempo.size(); j++){
+                QPair<QString, QString> data = tempo[i];
+                stream<< data.first << " - " << data.second<<"\r\n";
+            }
         }
+        ui->textEdit->append(getstrd());
     }
 
 }
@@ -94,8 +114,6 @@ void MainWindow::loadWebPage(){
 void MainWindow::myReplyFinished(QNetworkReply *reply){
     QByteArray webdata = reply->readAll();
 
-    QList<QPair<QString, QString>> graphValues;
-
     QJsonDocument document = QJsonDocument::fromJson(webdata);
 
     if(document.isArray() == true){
@@ -106,15 +124,90 @@ void MainWindow::myReplyFinished(QNetworkReply *reply){
 
         QJsonObject timeSeries = rootObject["Time Series (Daily)"].toObject();
         QStringList keys = timeSeries.keys();
-        for(QString k : keys){
-            QJsonObject dayValues = timeSeries[k].toObject();
-            QString openValues = dayValues["1. open"].toString();
 
-            QPair<QString, QString> dataItem;
-            dataItem.first = k;
-            dataItem.second = openValues;
+        for(int i = 0; i<5; i++){
+            switch (i){
+            case 0:{
+                for (QString k : keys){
+                            QJsonObject dayValues = timeSeries[k].toObject();
+                            QString openValue =  dayValues["1. open"].toString();
 
-            graphValues.append(dataItem);
+                            QPair<QString,QString> dataItem;
+                            dataItem.first = k;
+                            dataItem.second = openValue;
+
+                            graphValues.append(dataItem);
+                        }
+
+                        alldata.append(graphValues);
+                        graphValues.clear();
+
+                break;}
+            case 1:{
+                for (QString k : keys){
+                            QJsonObject dayValues = timeSeries[k].toObject();
+                            QString openValue =  dayValues["2. high"].toString();
+
+                            QPair<QString,QString> dataItem;
+                            dataItem.first = k;
+                            dataItem.second = openValue;
+
+                            graphValues.append(dataItem);
+                        }
+
+                        alldata.append(graphValues);
+                        graphValues.clear();
+
+                break;}
+            case 2:{
+                for (QString k : keys){
+                            QJsonObject dayValues = timeSeries[k].toObject();
+                            QString openValue =  dayValues["3. low"].toString();
+
+                            QPair<QString,QString> dataItem;
+                            dataItem.first = k;
+                            dataItem.second = openValue;
+
+                            graphValues.append(dataItem);
+                        }
+
+                        alldata.append(graphValues);
+                        graphValues.clear();
+
+                break;}
+            case 3:{
+                for (QString k : keys){
+                            QJsonObject dayValues = timeSeries[k].toObject();
+                            QString openValue =  dayValues["4. close"].toString();
+
+                            QPair<QString,QString> dataItem;
+                            dataItem.first = k;
+                            dataItem.second = openValue;
+
+                            graphValues.append(dataItem);
+                        }
+
+                        alldata.append(graphValues);
+                        graphValues.clear();
+
+                break;}
+            case 4:{
+                for (QString k : keys){
+                            QJsonObject dayValues = timeSeries[k].toObject();
+                            QString openValue =  dayValues["5. volume"].toString();
+
+                            QPair<QString,QString> dataItem;
+                            dataItem.first = k;
+                            dataItem.second = openValue;
+
+                            graphValues.append(dataItem);
+                        }
+
+                        alldata.append(graphValues);
+                        graphValues.clear();
+
+                break;}
+            }
         }
 
         saveToFile(graphValues);
