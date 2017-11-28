@@ -20,6 +20,8 @@ public:
     void setstrd(QString in);
     void saveToFile(QList<QList<QPair<QString, QString>>> in);
 
+
+
 private slots:
     void on_Btn1_clicked();
     void on_Btn2_clicked();
@@ -41,7 +43,7 @@ private:
     Ui::MainWindow *ui;
     QString strd;
     QList<QPair<QString, QString>> graphValues;
-    QList<QList<QPair<QString, Qstring>>> alldata;
+    QList<QList<QPair<QString, QString>>> alldata;
     Plotwindow *plotOpen, *plotHigh, *plotLow, *plotClose, *plotVolume;
 };
 
