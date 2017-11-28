@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "plotwindow.h"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
@@ -15,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     manager = new QNetworkAccessManager();
+    plotOpen = new Plotwindow();
+    plotHigh = new Plotwindow();
+    plotLow = new Plotwindow();
+    plotClose = new Plotwindow();
+    plotVolume = new Plotwindow();
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(myReplyFinished(QNetworkReply*)));
 }
 
@@ -25,32 +31,37 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Btn1_clicked()
 {
+    ui->textEdit->append("Loading data wait a moment...");
     loadWebPage();
 }
 
 void MainWindow::on_Btn2_clicked()
 {
-
+    plotOpen->makeplot(plotOpen->getValues());
+    plotOpen->show();
 }
 
 void MainWindow::on_Btn3_clicked()
 {
-
+    plotHigh->makeplot(plotHigh->getValues());
+    plotHigh->show();
 }
 
 void MainWindow::on_Btn4_clicked()
 {
-
+    plotLow->makeplot(plotLow->getValues());
+    plotLow->show();
 }
 
 void MainWindow::on_Btn5_clicked()
 {
-
+    plotClose->makeplot(plotClose->getValues());
 }
 
 void MainWindow::on_Btn6_clicked()
 {
-
+    plotVolume->makeplot(plotVolume->getValues());
+    plotVolume->show();
 }
 
 void MainWindow::setstrd(QString in){
@@ -91,6 +102,12 @@ void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
                 stream<< data.first << " - " << data.second<<"\r\n";
             }
         }
+
+        plotOpen->setValues(alldata[0]);
+        plotHigh->setValues(alldata[1]);
+        plotLow->setValues(alldata[2]);
+        plotClose->setValues(alldata[3]);
+        plotVolume->setValues(alldata[4]);
         ui->textEdit->append(getstrd());
     }
 
@@ -210,7 +227,7 @@ void MainWindow::myReplyFinished(QNetworkReply *reply){
             }
         }
 
-        saveToFile(graphValues);
+        saveToFile(alldata);
     }
 
 }
