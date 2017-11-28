@@ -17,7 +17,7 @@ void Plotwindow::setValues(QList<QPair<QString, QString> > in){
     Plotwindow::values = in;
 }
 
-QList<QPaire<QString, QString>> Plotwindow::getValues(){
+QList<QPair<QString, QString>> Plotwindow::getValues(){
     return Plotwindow::values;
 }
 
