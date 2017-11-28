@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QNetworkAccessManager>
+#include "plotwindow.h"
 namespace Ui {
 class MainWindow;
 }
@@ -41,6 +42,7 @@ private:
     QString strd;
     QList<QPair<QString, QString>> graphValues;
     QList<QList<QPair<QString, Qstring>>> alldata;
+    Plotwindow *plotOpen, *plotHigh, *plotLow, *plotClose, *plotVolume;
 };
 
 #endif // MAINWINDOW_H
