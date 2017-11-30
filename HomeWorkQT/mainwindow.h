@@ -19,6 +19,8 @@ public:
     ~MainWindow();
     void setstrd(QString in);
     void saveToFile(QList<QList<QPair<QString, QString>>> in);
+    void saveInMemory(QList<QList<QPair<QString, QString>>> in);
+    void readFromMemory(QByteArray in);
 
 
 
@@ -45,6 +47,7 @@ private:
     QList<QPair<QString, QString>> graphValues;
     QList<QList<QPair<QString, QString>>> alldata;
     Plotwindow *plotOpen, *plotHigh, *plotLow, *plotClose, *plotVolume;
+    QByteArray buffer;
 };
 
 #endif // MAINWINDOW_H
