@@ -9,6 +9,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -112,6 +113,38 @@ void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
         ui->textEdit->append(getstrd());
     }
 
+}
+
+void MainWindow::saveInMemory(QList<QList<QPair<QString, QString> > > in){
+    QDataStream stream(&buffer, QIODevice::ReadWrite);
+
+
+    for (int i = 0; i<in.size(); i++){
+        QList<QPair<QString, QString>> tempo = in[i];
+        stream<<tempo;
+        for(int j = 0; j<tempo.size(); j++){
+            QPair<QString, QString> temp = tempo[j];
+            stream<<temp.first;
+            stream<<temp.second;
+        }
+    }
+
+
+    readFromMemory(buffer);
+
+}
+
+void MainWindow::readFromMemory(QByteArray in){
+    QDataStream readstream(&buffer, QIODevice::ReadOnly);
+    for(int i = 0; i<in.size(); i++){
+        QString text1;
+        QString text2;
+        readstream >> text1;
+        readstream >> text2;
+        if(text1.isEmpty()!=true && text2.isEmpty()!=true){
+          qDebug()<<text1<<" - "<<text2<<"\r\n";
+        }
+    }
 }
 
 void MainWindow::loadWebPage(){
@@ -229,6 +262,7 @@ void MainWindow::myReplyFinished(QNetworkReply *reply){
         }
 
         saveToFile(alldata);
+        saveInMemory(alldata);
     }
 
 }
