@@ -15,12 +15,12 @@ class MainWindow : public QMainWindow
     QNetworkAccessManager* manager;
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setstrd(QString in);
-    void saveToFile(QList<QList<QPair<QString, QString>>> in);
-    void saveInMemory(QList<QList<QPair<QString, QString>>> in);
-    void readFromMemory(QByteArray in);
+    void saveToFile(QList<QList<QPair<QString, QString>>>& in);
+    void saveInMemory(QList<QList<QPair<QString, QString>>>& in);
+    void readFromMemory(QByteArray& in);
 
 
 

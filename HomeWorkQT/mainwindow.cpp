@@ -74,7 +74,7 @@ QString MainWindow::getstrd(){
     return MainWindow::strd;
 }
 
-void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
+void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>>& in){
     QString fileName = "D:\\GitQT\\HomeworkQT\\HomeworkQT\\Datafromwebsite.txt";
     QFile file(fileName);
     QTextStream stream(&file);
@@ -115,7 +115,7 @@ void MainWindow::saveToFile(QList<QList<QPair<QString, QString>>> in){
 
 }
 
-void MainWindow::saveInMemory(QList<QList<QPair<QString, QString> > > in){
+void MainWindow::saveInMemory(QList<QList<QPair<QString, QString> > >& in){
     QDataStream stream(&buffer, QIODevice::ReadWrite);
 
 
@@ -134,7 +134,7 @@ void MainWindow::saveInMemory(QList<QList<QPair<QString, QString> > > in){
 
 }
 
-void MainWindow::readFromMemory(QByteArray in){
+void MainWindow::readFromMemory(QByteArray& in){
     QDataStream readstream(&buffer, QIODevice::ReadOnly);
     for(int i = 0; i<in.size(); i++){
         QString text1;
@@ -156,8 +156,6 @@ void MainWindow::loadWebPage(){
     QUrl url(urlString);
 
     request.setUrl(url);
-
-    QNetworkReply *reply = manager->get(request);
 
     setstrd("Loading data is finished");
 }
