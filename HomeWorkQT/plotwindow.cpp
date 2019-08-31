@@ -25,7 +25,7 @@ QList<QPair<QString, QString>> Plotwindow::getValues(){
 void Plotwindow::makeplotVolume(QList<QPair<QString, QString> > in){
     QVector<double> x(in.size()), y(in.size());
     for (int i = 0; i<in.size(); i++){
-        x[i] = (double)i;
+        x[i] = double(i);
         QPair<QString, QString> temp = in[i];
         double tmpd = temp.second.toDouble();
         y[i] = tmpd/1000000.0;
@@ -47,7 +47,7 @@ void Plotwindow::makeplotVolume(QList<QPair<QString, QString> > in){
 void Plotwindow::makeplot(QList<QPair<QString, QString> > in){
     QVector<double> x(in.size()), y(in.size());
     for (int i = 0; i<in.size(); i++){
-        x[i] = (double)i;
+        x[i] = double(i);
         QPair<QString, QString> temp = in[i];
         double tmpd = temp.second.toDouble();
         y[i] = tmpd;
